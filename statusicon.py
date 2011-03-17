@@ -27,7 +27,7 @@ class StatusIcon:
         Set the tooltip of the status icon
         """
         text = self.monitor.daily
-        self.icon.set_tooltip("Today's total usage: " + text)
+        self.icon.set_tooltip("Today's total usage: " + str(text) + " MiB")
         return True
 
     def construct_menu(self, event_icon, event_button, event_time):
@@ -41,11 +41,12 @@ class StatusIcon:
         self.quit_item.connect("activate", self.destroy)
 
         # Last update time
-        mtime = self.monitor.today.strftime("%H:%M")
+        mtime = self.monitor.last_update.strftime("%H:%M")
         self.mtime_item = gtk.MenuItem("Last updated at " + mtime)
 
         # Daily total
-        self.daily_item = gtk.MenuItem("Daily total: " + self.monitor.daily)
+        self.daily_item = gtk.MenuItem("Daily total: " + 
+                str(self.monitor.daily) + " MiB")
 
         # Append the items to the menu in the correct order
         self.menu.append(self.daily_item)
