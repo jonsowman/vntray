@@ -12,7 +12,6 @@ class BandwidthMonitor:
     def __init__(self):
         self.daily = 0
         self.tenday = 0
-
         self.last_update = 0
 
     def update(self):

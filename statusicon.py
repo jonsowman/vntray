@@ -16,7 +16,6 @@ class StatusIcon:
 
         self.icon = gtk.StatusIcon()
         self.icon.set_from_stock(gtk.STOCK_NETWORK)
-
         self.icon.connect("popup-menu", self.construct_menu)
         self.icon.set_visible(True)
 
