@@ -17,13 +17,6 @@ monitor = BandwidthMonitor()
 # Create a new status bar icon with parameter in ms
 icon = StatusIcon(60000, monitor)
 
-def parse_vnstat():
-    """
-    Return an array of the lines from vnstat daily output
-    """
-    vnstat = commands.getoutput("vnstat -d").split("\n")
-    return vnstat
-
 def update():
     """
     Update the icon time, then get vnstat's output. Then find today's 
