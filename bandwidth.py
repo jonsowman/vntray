@@ -18,6 +18,7 @@ class BandwidthMonitor:
     def update(self):
         self.last_update = datetime.today()
         self.update_daily()
+        self.update_ten()
 
     def update_daily(self):
         vnstat = self.stats()
@@ -33,6 +34,13 @@ class BandwidthMonitor:
         ten days.
         """
         vnstat = self.stats()
+
+        self.tenday = 0
+        for line in vnstat:
+            items = line.split(";")
+            if (items[0] == "d"):
+                if (int(items[1]) in range(0, 9)):
+                    self.tenday += (int(items[3]) + int(items[4]))
 
     def stats(self):
         vnstat_lines = commands.getoutput("vnstat --dumpdb").split("\n")
