@@ -10,13 +10,9 @@ import gobject
 import gtk
 
 from statusicon import StatusIcon
-from vntray_time import IconTime
 
 # Create a new status bar icon with parameter in ms
 icon = StatusIcon(60000)
-
-# Make a new icon time object
-icontime = IconTime()
 
 def parse_vnstat():
     """
@@ -32,10 +28,10 @@ def update():
     Return True so that the interval timer continues. Returning false
     kills it.
     """
-    icontime.update()
+    icon.update_time()
     vnstat = parse_vnstat()
     for line in vnstat:
-        if "%s/%s/%s" % (icontime.day, icontime.month, icontime.year) in line:
+        if "%s/%s/%s" % (icon.day, icon.month, icon.year) in line:
             daily_stat = line.split("|")
             icon.set_tooltip(daily_stat[2].strip())
     return True
