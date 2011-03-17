@@ -16,11 +16,17 @@ class BandwidthMonitor:
         self.last_update = 0
 
     def update(self):
+        """
+        Run all of the update functions
+        """
         self.last_update = datetime.today()
         self.update_daily()
         self.update_ten()
 
     def update_daily(self):
+        """
+        Calculate the total bandwidth usage for today
+        """
         vnstat = self.stats()
 
         for line in vnstat:
@@ -43,5 +49,9 @@ class BandwidthMonitor:
                     self.tenday += (int(items[3]) + int(items[4]))
 
     def stats(self):
+        """
+        Get the output from vnstat's --dumpdb option and return
+        it in an array, one line per element
+        """
         vnstat_lines = commands.getoutput("vnstat --dumpdb").split("\n")
         return vnstat_lines
