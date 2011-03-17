@@ -10,9 +10,12 @@ import gobject
 import gtk
 
 from statusicon import StatusIcon
+from bandwidth import BandwidthMonitor
+
+monitor = BandwidthMonitor()
 
 # Create a new status bar icon with parameter in ms
-icon = StatusIcon(60000)
+icon = StatusIcon(60000, monitor)
 
 def parse_vnstat():
     """
@@ -28,12 +31,8 @@ def update():
     Return True so that the interval timer continues. Returning false
     kills it.
     """
-    icon.update_time()
-    vnstat = parse_vnstat()
-    for line in vnstat:
-        if "%s/%s/%s" % (icon.day, icon.month, icon.year) in line:
-            daily_stat = line.split("|")
-            icon.set_tooltip(daily_stat[2].strip())
+    monitor.update()
+    icon.set_tooltip()
     return True
 
 def main():
