@@ -9,7 +9,8 @@ import commands
 from datetime import datetime
 
 class BandwidthMonitor:
-    def __init__(self):
+    def __init__(self, config):
+        self.config = config
         self.daily = 0
         self.tenday = 0
         self.last_update = 0
@@ -52,5 +53,7 @@ class BandwidthMonitor:
         Get the output from vnstat's --dumpdb option and return
         it in an array, one line per element
         """
-        vnstat_lines = commands.getoutput("vnstat --dumpdb").split("\n")
+        iface = self.config.interface
+        vnstat_lines = \
+                commands.getoutput("vnstat --dumpdb -i " + iface).split("\n")
         return vnstat_lines

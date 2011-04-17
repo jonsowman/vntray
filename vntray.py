@@ -12,7 +12,9 @@ import gtk
 from statusicon import StatusIcon
 from bandwidth import BandwidthMonitor
 
-monitor = BandwidthMonitor()
+import config
+
+monitor = BandwidthMonitor(config.monitor)
 
 # Create a new status bar icon with parameter in ms
 icon = StatusIcon(60000, monitor)
