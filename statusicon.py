@@ -47,7 +47,7 @@ class StatusIcon:
         self.daily_item = gtk.MenuItem("Daily total: " + 
                 str(self.monitor.daily) + " MiB")
 
-        self.tenday_item = gtk.MenuItem("10 Day Average: " +
+        self.tenday_item = gtk.MenuItem("10 Day Total: " +
                 str(self.monitor.tenday) + " MiB")
 
         # Append the items to the menu in the correct order
